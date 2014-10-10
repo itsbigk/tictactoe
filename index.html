@@ -1,22 +1,48 @@
-<!Doctype html>
-<html ng-app="tttApp">
-<head>
-    <title>Project 2 - Period 1</title>
-    <link type="text/css" rel="stylesheet" href="style.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
-    <script src="main.js"></script>
-</head>
-<body>
-    <div class="board" ng-controller="tttController">
-        {{testing}}
-        <p>TTT Reference Step 1</p>
-        <div class="theBox"></div>
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+        <meta charset="utf-8">
+        <!-- Angular Link -->
+        <script src="/Users/kyleknott/wdi1011/WDI_LA_10-11/02-week/angular-app-from-scratch/blank-kitties/js/angular.min.js"></script>
+        <title>Tic Tac Toe</title>
 
-        <div ng-repeat="currentCell in cellList">
-            <div class="allCellsAlways" ng-click="playerPicks(currentCell)" ng-class="{xclass: currentCell.status=='X', oclass: currentCell.status=='O'}">
-                Cell Contents: {{currentCell.status}}
-            </div>
-        </div>    
-    </div>
-</body>
+        <style>
+            .cell {width: 150px; height: 150px; float: left; border: 2px solid blue;}
+            .clearFix {clear:both; text-align: center; font-size: 25px;}
+            body {text-align: center; font-family: 'Ubuntu', sans-serif; /*background: url('')*/}           
+        </style>
+
+        <script>
+            var app = angular.module('TicTacApp', []);
+            app.controller('TTTCtrl', ["$scope", function ($scope) {
+                $scope.board = [
+                {pos:0, marker: true},{pos: 1, marker: true},{pos: 2, marker: true}, 
+                {pos:3, marker: true},{pos: 4, marker: true},{pos: 5, marker: true},
+                {pos:6, marker: true},{pos: 7, marker: true},{pos: 8, marker: true}];
+
+                var turnCounter = 2;
+                //Defining the variable that will link to the 'x' image.
+                var imgx = document.createElement('img');
+                // imgx.src = 
+                //Defining the variable that will link to the 'o' image.
+                var imgo = document.createElement('img');
+                // imgo.src = 
+
+                // function below saying "undefined is not a function"
+                // $scope.playerMove = function(){
+                //      document.getElementsByClass('cell').style.backgroundColor = blue;
+                //  }
+            }]);
+        </script>
+    </head>
+    <body ng-app="TicTacApp" ng-controller="TTTCtrl">
+            <h2>Let's play tic tac toe!</h2>
+            <br />
+        <!-- Need to add a class for the div to be applied when I click  -->
+        <div class="cell" ng-repeat="cell in board"
+         ng-class="{clearFix: (cell.pos % 3) == 0}"
+         ng-click="playerMove()">
+        </div>
+    </body>
 </html>
