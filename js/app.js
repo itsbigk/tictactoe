@@ -27,42 +27,38 @@ TTTApp.controller('TTTController', function ($scope, $firebase) {
   };
 
   // $scope.board[0].xoStatus!!!!! SELECTING THE INDEX!
+  // Add something to show the move counter?
+  //Look into using the wait javascript tool for the winning move.
 
   $scope.playerPicks = function(oneCellObject) {
-    // $scope.moveCounter = $scope.moveCounter + 1;
+    $scope.moveCounter = $scope.moveCounter + 1;
     console.log("Made it to the function!!");
-    if ($scope.moveCounter == 0) {
+    if (($scope.moveCounter % 2) == 0) {
       oneCellObject.xoStatus = "X";
-      $scope.moveCounter = $scope.moveCounter + 1;  
+      winCondition("X");
+      $scope.moveCounter + 1;
+
     } 
 
     else {
       oneCellObject.xoStatus = "O";
-      $scope.moveCounter = $scope.moveCounter - 1;
+      winCondition("O");
+      $scope.moveCounter + 1;
     } 
-    
-    if ($scope.board[0].xoStatus == "X" && $scope.board[1].xoStatus == "X" && $scope.board[2].xoStatus == "X" || 
-      $scope.board[0].xoStatus == "X" && $scope.board[3].xoStatus == "X" && $scope.board[6].xoStatus == "X" || 
-      $scope.board[0].xoStatus == "X" && $scope.board[4].xoStatus == "X" && $scope.board[8].xoStatus == "X" ||
-      $scope.board[3].xoStatus == "X" && $scope.board[4].xoStatus == "X" && $scope.board[5].xoStatus == "X" ||
-      $scope.board[6].xoStatus == "X" && $scope.board[7].xoStatus == "X" && $scope.board[8].xoStatus == "X" ||
-      $scope.board[2].xoStatus == "X" && $scope.board[4].xoStatus == "X" && $scope.board[6].xoStatus == "X" ||
-      $scope.board[1].xoStatus == "X" && $scope.board[4].xoStatus == "X" && $scope.board[7].xoStatus == "X" ||
-      $scope.board[2].xoStatus == "X" && $scope.board[5].xoStatus == "X" && $scope.board[8].xoStatus == "X") {
-      alert("X is the winner!");
-    }
-
-    else if($scope.board[0].xoStatus == "O" && $scope.board[1].xoStatus == "O" && $scope.board[2].xoStatus == "O" || 
-      $scope.board[0].xoStatus == "O" && $scope.board[3].xoStatus == "O" && $scope.board[6].xoStatus == "O" || 
-      $scope.board[0].xoStatus == "O" && $scope.board[4].xoStatus == "O" && $scope.board[8].xoStatus == "O" ||
-      $scope.board[3].xoStatus == "O" && $scope.board[4].xoStatus == "O" && $scope.board[5].xoStatus == "O" ||
-      $scope.board[6].xoStatus == "O" && $scope.board[7].xoStatus == "O" && $scope.board[8].xoStatus == "O" ||
-      $scope.board[2].xoStatus == "O" && $scope.board[4].xoStatus == "O" && $scope.board[6].xoStatus == "O" ||
-      $scope.board[1].xoStatus == "O" && $scope.board[4].xoStatus == "O" && $scope.board[7].xoStatus == "O" ||
-      $scope.board[2].xoStatus == "O" && $scope.board[5].xoStatus == "O" && $scope.board[8].xoStatus == "O") {
-      alert("O is the winner!");
-    }
   };
+  // Make if statement to only check the winning possibilities on turn 5 and above
+  function winCondition(cellValue) {
+    if ($scope.gameSave.boardArray[0].xoStatus == cellValue && $scope.gameSave.boardArray[1].xoStatus == cellValue && $scope.gameSave.boardArray[2].xoStatus == cellValue || 
+      $scope.gameSave.boardArray[0].xoStatus == cellValue && $scope.gameSave.boardArray[3].xoStatus == cellValue && $scope.gameSave.boardArray[6].xoStatus == cellValue || 
+      $scope.gameSave.boardArray[0].xoStatus == cellValue && $scope.gameSave.boardArray[4].xoStatus == cellValue && $scope.gameSave.boardArray[8].xoStatus == cellValue ||
+      $scope.gameSave.boardArray[3].xoStatus == cellValue && $scope.gameSave.boardArray[4].xoStatus == cellValue && $scope.gameSave.boardArray[5].xoStatus == cellValue ||
+      $scope.gameSave.boardArray[6].xoStatus == cellValue && $scope.gameSave.boardArray[7].xoStatus == cellValue && $scope.gameSave.boardArray[8].xoStatus == cellValue ||
+      $scope.gameSave.boardArray[2].xoStatus == cellValue && $scope.gameSave.boardArray[4].xoStatus == cellValue && $scope.gameSave.boardArray[6].xoStatus == cellValue ||
+      $scope.gameSave.boardArray[1].xoStatus == cellValue && $scope.gameSave.boardArray[4].xoStatus == cellValue && $scope.gameSave.boardArray[7].xoStatus == cellValue ||
+      $scope.gameSave.boardArray[2].xoStatus == cellValue && $scope.gameSave.boardArray[5].xoStatus == cellValue && $scope.gameSave.boardArray[8].xoStatus == cellValue) {
+      alert(cellValue + " is the winner!");
+    }
+  }
 });
 
 // Make sure to fully define your functions for testing.
